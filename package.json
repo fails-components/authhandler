@@ -43,10 +43,10 @@
     "dist"
   ],
   "dependencies": {
-    "@fails-components/config": "^1.0.0",
-    "@fails-components/data": "^1.0.0",
-    "@fails-components/security": "^1.0.0",
-    "redis": "^4.0.1",
+    "@fails-components/config": "^1.0.1",
+    "@fails-components/data": "^1.0.1",
+    "@fails-components/security": "^1.0.1",
+    "redis": "^4.0.6",
     "socket.io": "^4.3.1",
     "uuid": "^8.3.2"
   },
