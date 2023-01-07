@@ -79,7 +79,8 @@ const initServer = async () => {
   const ioIns = new Server(server, {
     cors: cors,
     path: '/auth.io',
-    serveClient: false
+    serveClient: false,
+    transports: ['websocket']
   })
   const authio = ioIns.of('/auth')
 
