@@ -1,4 +1,4 @@
-FROM node:16-bullseye
+FROM 18-bullseye-slim
 
 ARG ENV
 
