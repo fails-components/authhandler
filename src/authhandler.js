@@ -125,6 +125,7 @@ export class AuthConnection {
               notescreenuuid: uuidv4(),
               purpose: 'screen',
               name: 'AuthScreen',
+              appversion: pmess.appversion,
               notepadhandler: this.notepadhandlerURL,
               maxrenew: 288 // 24-48h, depending on renewal frequency
             }
@@ -140,6 +141,7 @@ export class AuthConnection {
               purpose: 'lecture',
               name: 'AuthNotebook',
               user: pmess.user,
+              appversion: pmess.appversion,
               notepadhandler: this.notepadhandlerURL,
               maxrenew: 288 // 24-48h, depending on renewal frequency
             }
