@@ -32,8 +32,10 @@ export class AuthConnection {
 
     this.signScreenJwt = args.signScreenJwt
     this.signNotepadJwt = args.signNotepadJwt
+    this.signNotesJwt = args.signNotesJwt
 
     this.notepadhandlerURL = args.notepadhandlerURL
+    this.noteshandlerURL = args.noteshandlerURL
 
     this.SocketHandlerAuth = this.SocketHandlerAuth.bind(this)
   }
@@ -93,7 +95,12 @@ export class AuthConnection {
       toret.code = id
       if (cmd.reqs && Array.isArray(cmd.reqs)) {
         toret.reqs = cmd.reqs
-          .filter((el) => el.purpose === 'screen' || el.purpose === 'lecture')
+          .filter(
+            (el) =>
+              el.purpose === 'screen' ||
+              el.purpose === 'lecture' ||
+              el.purpose === 'notes'
+          )
           .slice(0, 10)
           .map((el) => ({ purpose: el.purpose, id: el.id }))
       } else return null
@@ -119,12 +126,29 @@ export class AuthConnection {
     if (currequest) {
       if (currequest.reqs) {
         toret = currequest.reqs.map(async (el) => {
-          if (el.purpose === 'screen') {
+          if (el.purpose === 'notes') {
+            const content = {
+              lectureuuid: pmess.uuid,
+              notescreenuuid: uuidv4(),
+              purpose: 'notes',
+              name: 'AuthNotes',
+              user: pmess.user,
+              appversion: pmess.appversion,
+              noteshandler: this.noteshandlerURL,
+              maxrenew: 288 // 24-48h, depending on renewal frequency
+            }
+            return {
+              token: await this.signNotesJwt(content),
+              id: el.id,
+              purpose: el.purpose
+            }
+          } else if (el.purpose === 'screen') {
             const content = {
               lectureuuid: pmess.uuid,
               notescreenuuid: uuidv4(),
               purpose: 'screen',
               name: 'AuthScreen',
+              user: pmess.user,
               appversion: pmess.appversion,
               notepadhandler: this.notepadhandlerURL,
               maxrenew: 288 // 24-48h, depending on renewal frequency

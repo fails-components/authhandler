@@ -63,6 +63,12 @@ const initServer = async () => {
     expiresIn: '10m',
     secret: cfg.getKeysSecret()
   })
+  const notessecurity = new FailsJWTSigner({
+    redis: rediscl,
+    type: 'notes',
+    expiresIn: '10m',
+    secret: cfg.getKeysSecret()
+  })
 
   // may be move the io also inside the object, on the other hand, I can not insert middleware anymore
 
@@ -91,7 +97,9 @@ const initServer = async () => {
     authio: authio,
     signScreenJwt: screensecurity.signToken,
     signNotepadJwt: lecturesecurity.signToken,
+    signNotesJwt: notessecurity.signToken,
     notepadhandlerURL: cfg.getURL('notepad'),
+    noteshandlerURL: cfg.getURL('notes'),
     authhandlerURL: cfg.getURL('auth')
   })
 
