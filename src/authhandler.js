@@ -134,6 +134,7 @@ export class AuthConnection {
               name: 'AuthNotes',
               user: pmess.user,
               appversion: pmess.appversion,
+              features: pmess.features,
               noteshandler: this.noteshandlerURL,
               maxrenew: 288 // 24-48h, depending on renewal frequency
             }
@@ -150,6 +151,7 @@ export class AuthConnection {
               name: 'AuthScreen',
               user: pmess.user,
               appversion: pmess.appversion,
+              features: pmess.features,
               notepadhandler: this.notepadhandlerURL,
               maxrenew: 288 // 24-48h, depending on renewal frequency
             }
@@ -166,6 +168,7 @@ export class AuthConnection {
               name: 'AuthNotebook',
               user: pmess.user,
               appversion: pmess.appversion,
+              features: pmess.features,
               notepadhandler: this.notepadhandlerURL,
               maxrenew: 288 // 24-48h, depending on renewal frequency
             }
